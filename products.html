@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FakeStore Products</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .product-card {
+            margin: 15px;
+            border-radius: 10px;
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: contain;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <h1 class="text-center mb-5">FakeStore Products</h1>
+        <div class="row" id="products-container">
+           
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        fetch('https://fakestoreapi.com/products')
+            .then(res => res.json())
+            .then(products => {
+                const container = document.getElementById('products-container');
+                
+                products.forEach(product => {
+                  
+                    const colDiv = document.createElement('div');
+                    colDiv.className = 'col-md-3 mb-4';
+                    
+                    const cardDiv = document.createElement('div');
+                    cardDiv.className = 'card product-card h-100';
+                    
+                    const img = document.createElement('img');
+                    img.className = 'card-img-top';
+                    img.src = product.image;
+                    img.alt = product.title;
+                    
+                    const cardBody = document.createElement('div');
+                    cardBody.className = 'card-body';
+                    
+                    const title = document.createElement('h5');
+                    title.className = 'card-title';
+                    title.textContent = product.title.substring(0, 20);
+                    
+                    const price = document.createElement('p');
+                    price.className = 'card-text text-success fw-bold';
+                    price.textContent = `$${product.price}`;
+                    
+                    
+                    cardBody.appendChild(title);
+                    cardBody.appendChild(price);
+                    cardDiv.appendChild(img);
+                    cardDiv.appendChild(cardBody);
+                    colDiv.appendChild(cardDiv);
+                    
+                   
+                    container.appendChild(colDiv);
+                });
+            })
+            .catch(e => console.log(e))
+    </script>
+</body>
+</html>
