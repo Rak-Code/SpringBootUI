@@ -78,7 +78,7 @@
                   <div id="container"></div>  
                 <h1 id="name"></h1>
                 <p id="password"></p>
-                     <script>
+                     <!-- <script>
                         fetch("http://localhost:8080/users")
                         .then(response => response.json())  
                         .then(data => {
@@ -110,7 +110,7 @@
                         })
                         .catch(e=> console.log(e))
                         .finally( () => console.log("fetch complete"))
-                     </script>
+                     </script> -->
                 </div>
                 <div
                     class="tab-pane"
@@ -127,6 +127,13 @@
                     aria-labelledby="messages-tab"
                 >
                      messages 
+                     <script>
+                        fetch('https://fakestoreapi.com/products')
+                                .then(res=>res.json())
+                                .then(json=>console.log(json))
+                                .catch(e=>console.log(e))
+                                .finally(()=>console.log("fetch complete"))
+                     </script>
                 </div>
              </div>
              
